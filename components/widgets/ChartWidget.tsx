@@ -30,6 +30,11 @@ const tooltipStyle = {
   boxShadow: "0 12px 40px -12px rgba(0,0,0,0.8)",
 };
 
+// Recharts renders the tooltip label (and item text) in black by default, which
+// is invisible on the dark tooltip — force readable light text explicitly.
+const tooltipLabelStyle = { color: "#f4f4f5", fontWeight: 600, marginBottom: 2 };
+const tooltipItemStyle = { color: "#e4e4e7" };
+
 export function ChartWidget({ data }: { data: ChartData }) {
   const { kind, xKey, series, rows } = data;
 
@@ -38,7 +43,9 @@ export function ChartWidget({ data }: { data: ChartData }) {
     return (
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
-          <Tooltip contentStyle={tooltipStyle} cursor={{ opacity: 0.1 }} />
+          <Tooltip contentStyle={tooltipStyle}
+          labelStyle={tooltipLabelStyle}
+          itemStyle={tooltipItemStyle} cursor={{ opacity: 0.1 }} />
           <Pie
             data={rows}
             dataKey={valueKey}
@@ -72,7 +79,9 @@ export function ChartWidget({ data }: { data: ChartData }) {
           <CartesianGrid stroke={GRID_COLOR} vertical={false} />
           <XAxis dataKey={xKey} tickLine={false} axisLine={false} {...AXIS} />
           <YAxis tickLine={false} axisLine={false} {...AXIS} width={36} />
-          <Tooltip contentStyle={tooltipStyle} cursor={{ stroke: GRID_COLOR }} />
+          <Tooltip contentStyle={tooltipStyle}
+          labelStyle={tooltipLabelStyle}
+          itemStyle={tooltipItemStyle} cursor={{ stroke: GRID_COLOR }} />
           {series.length > 1 && (
             <Legend wrapperStyle={{ fontSize: 11, color: "#a1a1aa" }} />
           )}
@@ -100,7 +109,9 @@ export function ChartWidget({ data }: { data: ChartData }) {
         <CartesianGrid stroke={GRID_COLOR} vertical={false} />
         <XAxis dataKey={xKey} tickLine={false} axisLine={false} {...AXIS} />
         <YAxis tickLine={false} axisLine={false} {...AXIS} width={36} />
-        <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
+        <Tooltip contentStyle={tooltipStyle}
+          labelStyle={tooltipLabelStyle}
+          itemStyle={tooltipItemStyle} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
         {series.length > 1 && (
           <Legend wrapperStyle={{ fontSize: 11, color: "#a1a1aa" }} />
         )}
