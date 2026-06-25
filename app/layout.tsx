@@ -2,9 +2,18 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Figma for Data — Interactive AI Canvas",
-  description:
-    "An infinite, dark-mode BI canvas. Upload documents, ask questions, and spawn interactive charts, spreadsheets, and insights powered by RAG.",
+  // Absolute-URL base so metadata/OG resolve correctly on Vercel previews + prod.
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000")
+  ),
+  title: "Figma for Data",
+  description: "Interactive AI Spreadsheet and BI Canvas",
+  applicationName: "Figma for Data",
+  // Icons are wired automatically by the App Router file convention:
+  //   app/icon.svg · app/favicon.ico · app/apple-icon.png
 };
 
 export const viewport: Viewport = {
